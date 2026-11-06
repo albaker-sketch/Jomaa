@@ -1,0 +1,48 @@
+{
+  "version": 1,
+  "skip": false,
+  "note": "",
+  "identity": {
+    "mode": "url",
+    "url": "https://instagram.com/aj_albaker"
+  },
+  "font": "Tajawal",
+  "capStyle": "auto",
+  "digits": "western",
+  "pace": "auto",
+  "content": {
+    "type": "auto",
+    "person": "auto"
+  },
+  "orientation": [
+    "9:16"
+  ],
+  "platforms": [
+    "instagram"
+  ],
+  "length": "auto",
+  "voice": {
+    "mode": "own",
+    "lang": null,
+    "gender": null,
+    "tts": null
+  },
+  "bgAudio": "auto",
+  "sfx": "auto",
+  "endCard": {
+    "on": true,
+    "handle": "aj_albaker",
+    "cta": "تابعني لتتعلم المزيد",
+    "word": "شاركني تعليقك"
+  },
+  "answered": [
+    "identity",
+    "font",
+    "digits",
+    "platforms",
+    "audio",
+    "endCard",
+    "moves"
+  ],
+  "savedAt": "2026-11-06T10:50:07+0000"
+}

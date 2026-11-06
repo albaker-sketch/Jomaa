@@ -1,0 +1,23 @@
+{
+  "bg": "#E9E5DB",
+  "ink": "#243950",
+  "acc": "#6A2537",
+  "clay": "#4E1A28",
+  "mut": "#8C8068",
+  "sand": "#A89A78",
+  "font": "Tajawal",
+  "handle": "@aj_albaker",
+  "logo": "logo.png",
+  "grade": false,
+  "faceAnchor": 0.3,
+  "badgeUntil": 0,
+  "capStyle": "card",
+  "outro": {
+    "l1": "",
+    "l2": "",
+    "cta": "تابعني لتتعلم المزيد",
+    "word": "شاركني تعليقك",
+    "sub": "@aj_albaker"
+  },
+  "onAcc": "#E9E5DB"
+}

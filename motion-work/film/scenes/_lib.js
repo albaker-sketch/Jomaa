@@ -130,3 +130,82 @@ export function rise(ctx, t, str, x, y, s, o = {}) {
   ctx.text(ctx.X, str, x, y + (1 - k) * 40 - kOut * 25, { family: FAM, weight: o.weight || 700, size: o.size || 60, color: o.color || ctx.P.ink, alpha: k * (1 - kOut) * (o.alpha ?? 1), align: o.align || 'center' });
   return k;
 }
+
+/* ── رسومات بلا ملامح (طلب صاحب الحساب) ── */
+const SKIN = '#D6B08A', WHITE = '#FFFFFF', AGAL = '#1F1D1C', HAIR = '#2B2522';
+function ghutraBack(X, cx, top, u, ink) {      // الغترة النازلة ورا الكتوف
+  X.beginPath(); X.moveTo(cx - 0.46 * u, top + 0.15 * u);
+  X.bezierCurveTo(cx - 0.75 * u, top + 0.9 * u, cx - 0.95 * u, top + 1.9 * u, cx - 0.9 * u, top + 2.55 * u);
+  X.lineTo(cx + 0.9 * u, top + 2.55 * u);
+  X.bezierCurveTo(cx + 0.95 * u, top + 1.9 * u, cx + 0.75 * u, top + 0.9 * u, cx + 0.46 * u, top + 0.15 * u); X.closePath();
+  X.fillStyle = '#F4F2EC'; X.fill(); X.strokeStyle = ink; X.lineWidth = 3; X.stroke();
+}
+function headTop(X, cx, top, u, ink, beard) {   // الوجه بلا ملامح + الغترة + العقال
+  const hy = top + 0.62 * u;
+  X.beginPath(); X.ellipse(cx, hy, 0.34 * u, 0.46 * u, 0, 0, 6.283); X.fillStyle = SKIN; X.fill();
+  if (beard === 'long') {
+    X.beginPath(); X.moveTo(cx - 0.33 * u, hy + 0.02 * u);
+    X.bezierCurveTo(cx - 0.36 * u, hy + 0.6 * u, cx - 0.22 * u, hy + 1.25 * u, cx, hy + 1.45 * u);
+    X.bezierCurveTo(cx + 0.22 * u, hy + 1.25 * u, cx + 0.36 * u, hy + 0.6 * u, cx + 0.33 * u, hy + 0.02 * u);
+    X.bezierCurveTo(cx + 0.25 * u, hy + 0.3 * u, cx - 0.25 * u, hy + 0.3 * u, cx - 0.33 * u, hy + 0.02 * u);
+    X.fillStyle = HAIR; X.fill();
+  } else if (beard === 'short') {   // عارض: خط رفيع على الفك
+    X.save(); X.beginPath(); X.ellipse(cx, hy, 0.34 * u, 0.46 * u, 0, 0.15, Math.PI - 0.15); X.strokeStyle = HAIR; X.lineWidth = 0.07 * u; X.lineCap = 'round'; X.stroke(); X.restore();
+  }
+  // الغترة فوق الراس وحول الوجه
+  X.beginPath(); X.moveTo(cx - 0.42 * u, hy + 0.35 * u);
+  X.bezierCurveTo(cx - 0.5 * u, hy - 0.2 * u, cx - 0.45 * u, top - 0.08 * u, cx, top - 0.1 * u);
+  X.bezierCurveTo(cx + 0.45 * u, top - 0.08 * u, cx + 0.5 * u, hy - 0.2 * u, cx + 0.42 * u, hy + 0.35 * u);
+  X.lineTo(cx + 0.33 * u, hy + 0.1 * u); X.bezierCurveTo(cx + 0.33 * u, hy - 0.42 * u, cx - 0.33 * u, hy - 0.42 * u, cx - 0.33 * u, hy + 0.1 * u); X.closePath();
+  X.fillStyle = WHITE; X.fill(); X.strokeStyle = ink; X.lineWidth = 3; X.stroke();
+  // العقال: حلقتين
+  X.strokeStyle = AGAL; X.lineWidth = 0.07 * u;
+  for (const dy of [0.12, 0.24]) { X.beginPath(); X.ellipse(cx, top + dy * u, 0.43 * u, 0.1 * u, 0, Math.PI * 1.02, Math.PI * 1.98); X.stroke(); }
+  X.beginPath(); X.ellipse(cx, top + 0.18 * u, 0.44 * u, 0.13 * u, 0, -0.1, Math.PI + 0.1); X.stroke();
+}
+/* رجل بثوب قطري، بلا ملامح. floor = خط الأرض، H = الطول. o: {long, k, mark(0..1)} */
+export function man(ctx, cx, floor, H, o = {}) {
+  const { X, P } = ctx; const k = o.k ?? 1; if (k <= 0) return; const u = H / 8, top = floor - H, ink = P.ink;
+  X.save(); X.globalAlpha *= k; X.translate(0, (1 - k) * 40);
+  X.fillStyle = 'rgba(36,57,80,0.12)'; X.beginPath(); X.ellipse(cx, floor + 6, 1.15 * u, 0.13 * u, 0, 0, 6.283); X.fill();
+  ghutraBack(X, cx, top, u, ink);
+  const hem = o.long ? floor + 0.04 * u : floor - 0.42 * u, sh = top + 1.25 * u;
+  // الرجول والنعال (تبين تحت الثوب القصير)
+  if (!o.long) { X.fillStyle = SKIN; for (const d of [-1, 1]) X.fillRect(cx + d * 0.32 * u - 0.1 * u, hem - 4, 0.2 * u, floor - hem - 0.05 * u);
+    X.fillStyle = '#5A4632'; for (const d of [-1, 1]) { X.beginPath(); X.ellipse(cx + d * 0.34 * u, floor - 0.06 * u, 0.24 * u, 0.08 * u, 0, 0, 6.283); X.fill(); } }
+  // الثوب
+  X.beginPath(); X.moveTo(cx - 0.3 * u, sh - 0.08 * u);
+  X.quadraticCurveTo(cx - 0.95 * u, sh, cx - 1.0 * u, sh + 0.5 * u);
+  X.lineTo(cx - 0.98 * u, top + 4.3 * u); X.lineTo(cx - 0.72 * u, top + 4.3 * u);
+  X.lineTo(cx - (o.long ? 1.0 : 0.82) * u, hem);
+  if (o.long) X.quadraticCurveTo(cx, hem + 0.12 * u, cx + 1.0 * u, hem); else X.lineTo(cx + 0.82 * u, hem);
+  X.lineTo(cx + 0.72 * u, top + 4.3 * u); X.lineTo(cx + 0.98 * u, top + 4.3 * u);
+  X.lineTo(cx + 1.0 * u, sh + 0.5 * u); X.quadraticCurveTo(cx + 0.95 * u, sh, cx + 0.3 * u, sh - 0.08 * u); X.closePath();
+  X.fillStyle = WHITE; X.fill(); X.strokeStyle = ink; X.lineWidth = 3.5; X.lineJoin = 'round'; X.stroke();
+  // خطوط الكم والياقة والجيب
+  X.lineWidth = 2; X.beginPath(); X.moveTo(cx - 0.72 * u, top + 4.3 * u); X.lineTo(cx - 0.72 * u, sh + 0.75 * u); X.moveTo(cx + 0.72 * u, top + 4.3 * u); X.lineTo(cx + 0.72 * u, sh + 0.75 * u); X.stroke();
+  X.fillStyle = SKIN; for (const d of [-1, 1]) { X.beginPath(); X.ellipse(cx + d * 0.85 * u, top + 4.45 * u, 0.11 * u, 0.15 * u, 0, 0, 6.283); X.fill(); }
+  X.beginPath(); X.roundRect(cx - 0.22 * u, sh - 0.12 * u, 0.44 * u, 0.16 * u, 4); X.fillStyle = WHITE; X.fill(); X.strokeStyle = ink; X.stroke();
+  X.beginPath(); X.moveTo(cx, sh + 0.04 * u); X.lineTo(cx, top + 2.7 * u); X.stroke();
+  X.fillStyle = ink; for (let i = 0; i < 3; i++) { X.beginPath(); X.arc(cx + 0.06 * u, sh + 0.35 * u + i * 0.4 * u, 3.5, 0, 6.283); X.fill(); }
+  X.beginPath(); X.moveTo(cx + 0.35 * u, sh + 0.7 * u); X.lineTo(cx + 0.65 * u, sh + 0.7 * u); X.stroke();
+  headTop(X, cx, top, u, ink, o.beard);
+  X.restore();
+  // علامة على طرف الثوب
+  const km = o.mark ?? 0;
+  if (km > 0) { X.save(); X.globalAlpha = km * k; X.strokeStyle = P.acc; X.lineWidth = 4; X.setLineDash([12, 9]);
+    const y = o.long ? floor : hem; X.beginPath(); X.moveTo(cx - 1.35 * u, y); X.lineTo(cx + 1.35 * u, y); X.stroke(); X.restore(); }
+}
+/* راس وكتوف بلا ملامح. beard: 'long' | 'short' */
+export function bust(ctx, cx, top, s, o = {}) {
+  const { X, P } = ctx; const k = o.k ?? 1; if (k <= 0) return; const u = s, ink = P.ink;
+  X.save(); X.globalAlpha *= k; X.translate(0, (1 - k) * 40);
+  ghutraBack(X, cx, top, u, ink);
+  const sh = top + 1.25 * u;
+  X.beginPath(); X.moveTo(cx - 0.3 * u, sh - 0.08 * u); X.quadraticCurveTo(cx - 1.0 * u, sh, cx - 1.08 * u, sh + 0.7 * u); X.lineTo(cx - 1.08 * u, top + 2.55 * u);
+  X.lineTo(cx + 1.08 * u, top + 2.55 * u); X.lineTo(cx + 1.08 * u, sh + 0.7 * u); X.quadraticCurveTo(cx + 1.0 * u, sh, cx + 0.3 * u, sh - 0.08 * u); X.closePath();
+  X.fillStyle = WHITE; X.fill(); X.strokeStyle = ink; X.lineWidth = 3.5; X.stroke();
+  X.lineWidth = 2; X.beginPath(); X.roundRect(cx - 0.22 * u, sh - 0.12 * u, 0.44 * u, 0.16 * u, 4); X.stroke(); X.beginPath(); X.moveTo(cx, sh + 0.04 * u); X.lineTo(cx, top + 2.55 * u); X.stroke();
+  headTop(X, cx, top, u, ink, o.beard);
+  X.restore();
+}

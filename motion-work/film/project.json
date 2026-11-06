@@ -22,7 +22,11 @@
  },
  "images": {
   "logo": "assets/logo.png",
-  "logoSand": "assets/logo_sand.png"
+  "logoSand": "assets/logo_sand.png",
+  "manLong": "assets/man_long.png",
+  "manShort": "assets/man_short.png",
+  "bustPlain": "assets/bust_plain.png",
+  "bustBeard": "assets/bust_beard.png"
  },
  "post": {
   "grain": 0.03,

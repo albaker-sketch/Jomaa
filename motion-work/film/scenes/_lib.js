@@ -132,43 +132,128 @@ export function rise(ctx, t, str, x, y, s, o = {}) {
 }
 
 /* ── رسومات بلا ملامح (طلب صاحب الحساب) ── */
-const SKIN = '#D6B08A', WHITE = '#FFFFFF', AGAL = '#1F1D1C', HAIR = '#2B2522';
-function ghutraBack(X, cx, top, u, ink) {      // الغترة النازلة ورا الكتوف
-  X.beginPath(); X.moveTo(cx - 0.46 * u, top + 0.15 * u);
-  X.bezierCurveTo(cx - 0.75 * u, top + 0.9 * u, cx - 0.95 * u, top + 1.9 * u, cx - 0.9 * u, top + 2.55 * u);
-  X.lineTo(cx + 0.9 * u, top + 2.55 * u);
-  X.bezierCurveTo(cx + 0.95 * u, top + 1.9 * u, cx + 0.75 * u, top + 0.9 * u, cx + 0.46 * u, top + 0.15 * u); X.closePath();
-  X.fillStyle = '#F4F2EC'; X.fill(); X.strokeStyle = ink; X.lineWidth = 3; X.stroke();
-}
-function headTop(X, cx, top, u, ink, beard) {   // الوجه بلا ملامح + الغترة + العقال
+const SKIN = '#D4AC85', SKIN_D = '#B98E68', WHITE = '#FFFFFF', SHADE = '#DCDDE0', AGAL = '#141414';
+const HAIRS = ['#16120F', '#211B17', '#2C241F', '#3A2F28', '#0E0C0B'];
+function lcg(seed) { let s = seed >>> 0; return () => ((s = (s * 1664525 + 1013904223) >>> 0) / 4294967296); }
+/* الغترة النازلة على الكتوف (ورا الوجه): طرفين أبيض بطيّات وظل خفيف */
+function ghutraBack(X, cx, top, u, ink) {
   const hy = top + 0.62 * u;
-  X.beginPath(); X.ellipse(cx, hy, 0.34 * u, 0.46 * u, 0, 0, 6.283); X.fillStyle = SKIN; X.fill();
-  if (beard === 'long') {
-    X.beginPath(); X.moveTo(cx - 0.33 * u, hy + 0.02 * u);
-    X.bezierCurveTo(cx - 0.36 * u, hy + 0.6 * u, cx - 0.22 * u, hy + 1.25 * u, cx, hy + 1.45 * u);
-    X.bezierCurveTo(cx + 0.22 * u, hy + 1.25 * u, cx + 0.36 * u, hy + 0.6 * u, cx + 0.33 * u, hy + 0.02 * u);
-    X.bezierCurveTo(cx + 0.25 * u, hy + 0.3 * u, cx - 0.25 * u, hy + 0.3 * u, cx - 0.33 * u, hy + 0.02 * u);
-    X.fillStyle = HAIR; X.fill();
-  } else if (beard === 'short') {   // عارض: خط رفيع على الفك
-    X.save(); X.beginPath(); X.ellipse(cx, hy, 0.34 * u, 0.46 * u, 0, 0.15, Math.PI - 0.15); X.strokeStyle = HAIR; X.lineWidth = 0.07 * u; X.lineCap = 'round'; X.stroke(); X.restore();
+  for (const d of [-1, 1]) {
+    X.beginPath(); X.moveTo(cx + d * 0.30 * u, hy - 0.30 * u);
+    X.bezierCurveTo(cx + d * 0.62 * u, hy - 0.05 * u, cx + d * 0.70 * u, hy + 0.75 * u, cx + d * 0.98 * u, hy + 1.85 * u);
+    X.lineTo(cx + d * 0.36 * u, hy + 1.95 * u);
+    X.bezierCurveTo(cx + d * 0.40 * u, hy + 1.2 * u, cx + d * 0.30 * u, hy + 0.7 * u, cx + d * 0.26 * u, hy + 0.3 * u); X.closePath();
+    const g = X.createLinearGradient(cx + d * 0.25 * u, 0, cx + d * 1.0 * u, 0); g.addColorStop(0, '#E9EAEC'); g.addColorStop(0.5, WHITE); g.addColorStop(1, '#E4E5E8');
+    X.fillStyle = g; X.fill(); X.strokeStyle = ink; X.lineWidth = 2.5; X.stroke();
+    X.save(); X.strokeStyle = 'rgba(36,57,80,0.28)'; X.lineWidth = 2;
+    for (const f of [0.35, 0.6]) { X.beginPath(); X.moveTo(cx + d * (0.33 + f * 0.25) * u, hy + 0.05 * u); X.quadraticCurveTo(cx + d * (0.45 + f * 0.35) * u, hy + 0.9 * u, cx + d * (0.5 + f * 0.42) * u, hy + 1.8 * u); X.stroke(); }
+    X.restore();
   }
-  // الغترة فوق الراس وحول الوجه
-  X.beginPath(); X.moveTo(cx - 0.42 * u, hy + 0.35 * u);
-  X.bezierCurveTo(cx - 0.5 * u, hy - 0.2 * u, cx - 0.45 * u, top - 0.08 * u, cx, top - 0.1 * u);
-  X.bezierCurveTo(cx + 0.45 * u, top - 0.08 * u, cx + 0.5 * u, hy - 0.2 * u, cx + 0.42 * u, hy + 0.35 * u);
-  X.lineTo(cx + 0.33 * u, hy + 0.1 * u); X.bezierCurveTo(cx + 0.33 * u, hy - 0.42 * u, cx - 0.33 * u, hy - 0.42 * u, cx - 0.33 * u, hy + 0.1 * u); X.closePath();
-  X.fillStyle = WHITE; X.fill(); X.strokeStyle = ink; X.lineWidth = 3; X.stroke();
-  // العقال: حلقتين
-  X.strokeStyle = AGAL; X.lineWidth = 0.07 * u;
-  for (const dy of [0.12, 0.24]) { X.beginPath(); X.ellipse(cx, top + dy * u, 0.43 * u, 0.1 * u, 0, Math.PI * 1.02, Math.PI * 1.98); X.stroke(); }
-  X.beginPath(); X.ellipse(cx, top + 0.18 * u, 0.44 * u, 0.13 * u, 0, -0.1, Math.PI + 0.1); X.stroke();
+}
+function face(X, cx, hy, u) {
+  X.beginPath(); X.ellipse(cx, hy, 0.31 * u, 0.42 * u, 0, 0, 6.283);
+  const g = X.createRadialGradient(cx - 0.06 * u, hy - 0.1 * u, 0.05 * u, cx, hy, 0.45 * u); g.addColorStop(0, '#E0BB95'); g.addColorStop(1, SKIN_D);
+  X.fillStyle = g; X.fill();
+}
+/* لحية طويلة: شكل أساس + خصل شعر كثيرة تنزل وتتجمع عند طرف مدوّر */
+function beardLong(X, cx, hy, u) {
+  const tip = [cx, hy + 1.16 * u];
+  const shape = () => { X.beginPath(); X.moveTo(cx - 0.30 * u, hy - 0.06 * u);
+    X.bezierCurveTo(cx - 0.33 * u, hy + 0.30 * u, cx - 0.30 * u, hy + 0.62 * u, cx - 0.16 * u, hy + 0.98 * u);
+    X.quadraticCurveTo(cx, hy + 1.24 * u, cx + 0.16 * u, hy + 0.98 * u);
+    X.bezierCurveTo(cx + 0.30 * u, hy + 0.62 * u, cx + 0.33 * u, hy + 0.30 * u, cx + 0.30 * u, hy - 0.06 * u);
+    X.bezierCurveTo(cx + 0.24 * u, hy + 0.16 * u, cx + 0.12 * u, hy + 0.24 * u, cx, hy + 0.24 * u);
+    X.bezierCurveTo(cx - 0.12 * u, hy + 0.24 * u, cx - 0.24 * u, hy + 0.16 * u, cx - 0.30 * u, hy - 0.06 * u); X.closePath(); };
+  shape(); const g = X.createLinearGradient(0, hy, 0, hy + 1.2 * u); g.addColorStop(0, '#231D19'); g.addColorStop(1, '#17120F'); X.fillStyle = g; X.fill();
+  const r = lcg(7); X.save(); X.lineCap = 'round';
+  shape(); X.clip();
+  for (let i = 0; i < 520; i++) {
+    const side = r() * 2 - 1, d0 = r() * 0.55;
+    const w0 = 0.31 - 0.05 * d0, sx = cx + side * w0 * u, sy = hy + (0.02 + d0 + 0.1 * (1 - Math.abs(side))) * u;
+    const len = 0.35 + r() * 0.55, d1 = Math.min(1.16, d0 + len), w1 = Math.max(0.02, 0.31 * (1 - Math.pow(d1 / 1.16, 1.6)));
+    const ex = cx + side * w1 * u + (r() - 0.5) * 0.04 * u, ey = hy + d1 * u;
+    const wav = (r() - 0.5) * 0.09 * u;
+    X.strokeStyle = HAIRS[(r() * HAIRS.length) | 0]; X.globalAlpha = 0.5 + 0.5 * r(); X.lineWidth = 1 + r() * 2;
+    X.beginPath(); X.moveTo(sx, sy); X.bezierCurveTo(sx + wav, sy + (ey - sy) * 0.33, ex - wav, sy + (ey - sy) * 0.66, ex, ey); X.stroke();
+  }
+  X.restore(); X.save(); X.lineCap = 'round';
+  // أطراف ناعمة تطلع برّا الشكل شوي
+  for (let i = 0; i < 90; i++) { const side = r() < 0.5 ? -1 : 1, d = 0.1 + r() * 1.0, w = 0.31 * (1 - Math.pow(Math.min(1, d / 1.16), 1.6));
+    const x = cx + side * w * u, y = hy + d * u; X.strokeStyle = HAIRS[(r() * 3) | 0]; X.globalAlpha = 0.6; X.lineWidth = 1.2;
+    X.beginPath(); X.moveTo(x - side * 4, y); X.quadraticCurveTo(x + side * (3 + r() * 6), y + 8, x + side * (1 + r() * 4), y + 16 + r() * 10); X.stroke(); }
+  // لمعة خفيفة
+  X.globalAlpha = 0.18; X.strokeStyle = '#7A6A5E'; X.lineWidth = 2;
+  for (let i = 0; i < 22; i++) { const s = (r() - 0.5) * 0.36; X.beginPath(); X.moveTo(cx + s * u, hy + 0.35 * u); X.quadraticCurveTo(cx + s * 1.1 * u, hy + 0.75 * u, cx + s * 0.4 * u, hy + 1.1 * u); X.stroke(); }
+  X.restore();
+}
+/* عارض: شعر قصير مرتب على خط الفك من السوالف للذقن */
+function beardShort(X, cx, hy, u) {
+  const r = lcg(11); X.save();
+  X.beginPath(); X.ellipse(cx, hy, 0.31 * u, 0.42 * u, 0, 0, 6.283); X.clip();
+  X.beginPath(); X.ellipse(cx, hy + 0.02 * u, 0.31 * u, 0.42 * u, 0, -0.05, Math.PI + 0.05); X.ellipse(cx, hy - 0.03 * u, 0.27 * u, 0.375 * u, 0, Math.PI + 0.05, -0.05, true); X.closePath();
+  X.fillStyle = 'rgba(35,28,24,0.85)'; X.fill();
+  X.lineCap = 'round';
+  for (let i = 0; i < 260; i++) { const a = -0.05 + r() * (Math.PI + 0.1), rr = 0.9 + r() * 0.11;
+    const x = cx + Math.cos(a) * 0.31 * u * rr, y = hy + Math.sin(a) * 0.42 * u * rr;
+    X.strokeStyle = HAIRS[(r() * 4) | 0]; X.globalAlpha = 0.7; X.lineWidth = 1.2 + r();
+    X.beginPath(); X.moveTo(x, y); X.lineTo(x + (r() - 0.5) * 4, y + 3 + r() * 5); X.stroke(); }
+  X.restore();
+}
+/* الغترة على الراس (القحفية تحتها): قمّة مرفوعة شوي فوق الجبهة على الطريقة القطرية، وطيّات، وفتحة الوجه */
+function ghutraTop(X, cx, top, u, ink) {
+  const hy = top + 0.62 * u;
+  X.beginPath();
+  X.moveTo(cx - 0.31 * u, hy + 0.32 * u);
+  X.bezierCurveTo(cx - 0.38 * u, hy - 0.05 * u, cx - 0.44 * u, hy - 0.35 * u, cx - 0.40 * u, top + 0.14 * u);
+  X.bezierCurveTo(cx - 0.36 * u, top - 0.06 * u, cx - 0.18 * u, top - 0.12 * u, cx, top - 0.12 * u);
+  X.bezierCurveTo(cx + 0.18 * u, top - 0.12 * u, cx + 0.36 * u, top - 0.06 * u, cx + 0.40 * u, top + 0.14 * u);
+  X.bezierCurveTo(cx + 0.44 * u, hy - 0.35 * u, cx + 0.38 * u, hy - 0.05 * u, cx + 0.31 * u, hy + 0.32 * u);
+  // فتحة الوجه (من تحت لفوق) مع القمة المرفوعة بالنص
+  X.bezierCurveTo(cx + 0.27 * u, hy + 0.0 * u, cx + 0.27 * u, hy - 0.22 * u, cx + 0.14 * u, hy - 0.29 * u);
+  X.quadraticCurveTo(cx + 0.05 * u, hy - 0.30 * u, cx, hy - 0.37 * u);
+  X.quadraticCurveTo(cx - 0.05 * u, hy - 0.30 * u, cx - 0.14 * u, hy - 0.29 * u);
+  X.bezierCurveTo(cx - 0.27 * u, hy - 0.22 * u, cx - 0.27 * u, hy + 0.0 * u, cx - 0.31 * u, hy + 0.32 * u);
+  X.closePath();
+  const g = X.createLinearGradient(cx - 0.45 * u, 0, cx + 0.45 * u, 0); g.addColorStop(0, '#E3E4E7'); g.addColorStop(0.35, WHITE); g.addColorStop(0.65, WHITE); g.addColorStop(1, '#E0E1E5');
+  X.fillStyle = g; X.fill(); X.strokeStyle = ink; X.lineWidth = 2.5; X.stroke();
+  // ظل داخل فتحة الوجه
+  X.save(); X.strokeStyle = 'rgba(36,57,80,0.22)'; X.lineWidth = 5;
+  X.beginPath(); X.moveTo(cx - 0.29 * u, hy + 0.25 * u); X.bezierCurveTo(cx - 0.25 * u, hy - 0.05 * u, cx - 0.24 * u, hy - 0.2 * u, cx - 0.12 * u, hy - 0.26 * u); X.stroke();
+  X.beginPath(); X.moveTo(cx + 0.29 * u, hy + 0.25 * u); X.bezierCurveTo(cx + 0.25 * u, hy - 0.05 * u, cx + 0.24 * u, hy - 0.2 * u, cx + 0.12 * u, hy - 0.26 * u); X.stroke();
+  // طيّات القمة
+  X.strokeStyle = 'rgba(36,57,80,0.3)'; X.lineWidth = 2;
+  X.beginPath(); X.moveTo(cx, hy - 0.37 * u); X.lineTo(cx, top + 0.02 * u); X.stroke();
+  for (const d of [-1, 1]) { X.beginPath(); X.moveTo(cx + d * 0.06 * u, hy - 0.33 * u); X.quadraticCurveTo(cx + d * 0.2 * u, top + 0.15 * u, cx + d * 0.32 * u, top + 0.12 * u); X.stroke(); }
+  X.restore();
+}
+/* العقال: حلقتين سود ثخينة فوق الراس بمنظور (الخلف أعلى وأرفع، القدّام أنزل)، بلمعة */
+function agal(X, cx, top, u) {
+  const y0 = top + 0.13 * u, rx = 0.365 * u, ry = 0.1 * u, th = 0.07 * u;
+  X.save(); X.lineCap = 'round';
+  for (const dy of [0, 0.085 * u]) {
+    // الخلف (نص علوي) — أغمق شوي ويطلع أرفع
+    X.strokeStyle = '#0B0B0B'; X.lineWidth = th * 0.9; X.beginPath(); X.ellipse(cx, y0 + dy, rx, ry, 0, Math.PI, 2 * Math.PI); X.stroke();
+  }
+  for (const dy of [0, 0.085 * u]) {
+    // القدّام (نص سفلي)
+    X.strokeStyle = AGAL; X.lineWidth = th; X.beginPath(); X.ellipse(cx, y0 + dy, rx, ry, 0, 0, Math.PI); X.stroke();
+    X.strokeStyle = 'rgba(255,255,255,0.28)'; X.lineWidth = th * 0.22; X.beginPath(); X.ellipse(cx, y0 + dy - th * 0.22, rx, ry, 0, 0.35, Math.PI - 0.35); X.stroke();
+  }
+  X.restore();
+}
+function headTop(X, cx, top, u, ink, beard) {
+  const hy = top + 0.62 * u;
+  ghutraBack(X, cx, top, u, ink);
+  face(X, cx, hy, u);
+  if (beard === 'long') beardLong(X, cx, hy, u); else if (beard === 'short') beardShort(X, cx, hy, u);
+  ghutraTop(X, cx, top, u, ink);
+  agal(X, cx, top, u);
 }
 /* رجل بثوب قطري، بلا ملامح. floor = خط الأرض، H = الطول. o: {long, k, mark(0..1)} */
 export function man(ctx, cx, floor, H, o = {}) {
   const { X, P } = ctx; const k = o.k ?? 1; if (k <= 0) return; const u = H / 8, top = floor - H, ink = P.ink;
   X.save(); X.globalAlpha *= k; X.translate(0, (1 - k) * 40);
   X.fillStyle = 'rgba(36,57,80,0.12)'; X.beginPath(); X.ellipse(cx, floor + 6, 1.15 * u, 0.13 * u, 0, 0, 6.283); X.fill();
-  ghutraBack(X, cx, top, u, ink);
   const hem = o.long ? floor + 0.04 * u : floor - 0.42 * u, sh = top + 1.25 * u;
   // الرجول والنعال (تبين تحت الثوب القصير)
   if (!o.long) { X.fillStyle = SKIN; for (const d of [-1, 1]) X.fillRect(cx + d * 0.32 * u - 0.1 * u, hem - 4, 0.2 * u, floor - hem - 0.05 * u);
@@ -200,7 +285,6 @@ export function man(ctx, cx, floor, H, o = {}) {
 export function bust(ctx, cx, top, s, o = {}) {
   const { X, P } = ctx; const k = o.k ?? 1; if (k <= 0) return; const u = s, ink = P.ink;
   X.save(); X.globalAlpha *= k; X.translate(0, (1 - k) * 40);
-  ghutraBack(X, cx, top, u, ink);
   const sh = top + 1.25 * u;
   X.beginPath(); X.moveTo(cx - 0.3 * u, sh - 0.08 * u); X.quadraticCurveTo(cx - 1.0 * u, sh, cx - 1.08 * u, sh + 0.7 * u); X.lineTo(cx - 1.08 * u, top + 2.55 * u);
   X.lineTo(cx + 1.08 * u, top + 2.55 * u); X.lineTo(cx + 1.08 * u, sh + 0.7 * u); X.quadraticCurveTo(cx + 1.0 * u, sh, cx + 0.3 * u, sh - 0.08 * u); X.closePath();

@@ -1,0 +1,144 @@
+[
+ {
+  "type": "whoosh",
+  "at": "scene:s2",
+  "gain": 0.18,
+  "dur": 0.6
+ },
+ {
+  "type": "whoosh",
+  "at": "scene:s3",
+  "gain": 0.18,
+  "dur": 0.6
+ },
+ {
+  "type": "whoosh",
+  "at": "scene:s4",
+  "gain": 0.18,
+  "dur": 0.6
+ },
+ {
+  "type": "whoosh",
+  "at": "scene:s5",
+  "gain": 0.18,
+  "dur": 0.6
+ },
+ {
+  "type": "whoosh",
+  "at": "scene:s6",
+  "gain": 0.18,
+  "dur": 0.6
+ },
+ {
+  "type": "whoosh",
+  "at": "scene:s7",
+  "gain": 0.18,
+  "dur": 0.6
+ },
+ {
+  "type": "whoosh",
+  "at": "scene:s8",
+  "gain": 0.18,
+  "dur": 0.6
+ },
+ {
+  "type": "whoosh",
+  "at": "scene:s9",
+  "gain": 0.18,
+  "dur": 0.6
+ },
+ {
+  "type": "whoosh",
+  "at": "scene:s10",
+  "gain": 0.18,
+  "dur": 0.6
+ },
+ {
+  "type": "whoosh",
+  "at": "scene:s11",
+  "gain": 0.18,
+  "dur": 0.6
+ },
+ {
+  "type": "whoosh",
+  "at": "scene:s12",
+  "gain": 0.18,
+  "dur": 0.6
+ },
+ {
+  "type": "whoosh",
+  "at": "scene:s13",
+  "gain": 0.18,
+  "dur": 0.6
+ },
+ {
+  "type": "shimmer",
+  "at": "word:l9:5",
+  "gain": 0.25
+ },
+ {
+  "type": "pop",
+  "at": "word:l4:4",
+  "gain": 0.18
+ },
+ {
+  "type": "pop",
+  "at": "word:l4:5",
+  "gain": 0.18
+ },
+ {
+  "type": "pop",
+  "at": "word:l4:6",
+  "gain": 0.18
+ },
+ {
+  "type": "pop",
+  "at": "word:l4:7",
+  "gain": 0.18
+ },
+ {
+  "type": "pop",
+  "at": "word:l4:8",
+  "gain": 0.18
+ },
+ {
+  "type": "tick",
+  "at": "word:l6:3",
+  "gain": 0.3
+ },
+ {
+  "type": "tick",
+  "at": "word:l6:8",
+  "gain": 0.3
+ },
+ {
+  "type": "tick",
+  "at": "word:l15:2",
+  "gain": 0.3
+ },
+ {
+  "type": "tick",
+  "at": "word:l16:3",
+  "gain": 0.3
+ },
+ {
+  "type": "tick",
+  "at": "word:l26:9",
+  "gain": 0.3
+ },
+ {
+  "type": "tick",
+  "at": "word:l27:3",
+  "gain": 0.3
+ },
+ {
+  "type": "shimmer",
+  "at": "word:l8:3",
+  "gain": 0.2
+ },
+ {
+  "type": "shimmer",
+  "at": "line-end:l28+1.0",
+  "gain": 0.22
+ }
+]

@@ -11,8 +11,8 @@ MOTION.scene({ id: 'c1', start: 0, end: 3,
       ctx.text(X, 'عن هذا النعيم', 540, 1080, { family: FAM, weight: 900, size: 140, color: P.hi });
       ctx.text(X, 'يوم القيامة', 540, 1300, { family: FAM, weight: 900, size: 120, color: P.bg });
     } else if (v === 1) {
-      bg(ctx, 3, { color: P.acc, pat: 0.08 });
-      X.save(); X.globalAlpha = 0.22; X.strokeStyle = P.hi; X.lineWidth = 8; X.translate(540, 960);
+      bg(ctx, 3, { color: v === 1 ? P.ink : P.acc, pat: 0.07 });
+      X.save(); X.globalAlpha = 0.3; X.strokeStyle = P.hi; X.lineWidth = 8; X.translate(540, 960);
       for (const r0 of [0, Math.PI / 4]) { X.beginPath(); for (let i = 0; i < 4; i++) { const a = r0 + i * Math.PI / 2; X[i ? 'lineTo' : 'moveTo'](560 * Math.cos(a), 560 * Math.sin(a)); } X.closePath(); X.stroke(); } X.restore();
       ctx.text(X, 'النعيم', 540, 960, { family: FAM, weight: 900, size: 300, color: P.bg });
       ctx.text(X, 'لتُسألُنّ عن هذا', 540, 640, { family: FAM, weight: 900, size: 110, color: P.hi });

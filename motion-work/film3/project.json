@@ -1,5 +1,5 @@
 {
- "name": "film3",
+ "name": "النعيم — aj_albaker",
  "fps": 60,
  "width": 1080,
  "height": 1920,
@@ -38,8 +38,218 @@
    "id": "s1",
    "file": "scenes/s1.js",
    "lines": [
-    "l1"
+    "l1",
+    "l2",
+    "l3"
    ]
+  },
+  {
+   "id": "s2",
+   "file": "scenes/s2.js",
+   "lines": [
+    "l4"
+   ],
+   "transition": {
+    "type": "crossfade",
+    "dur": 0.5
+   }
+  },
+  {
+   "id": "s3",
+   "file": "scenes/s3.js",
+   "lines": [
+    "l5",
+    "l6",
+    "l7",
+    "l8"
+   ],
+   "transition": {
+    "type": "crossfade",
+    "dur": 0.5
+   }
+  },
+  {
+   "id": "s4",
+   "file": "scenes/s4.js",
+   "lines": [
+    "l9",
+    "l10",
+    "l11"
+   ],
+   "transition": {
+    "type": "crossfade",
+    "dur": 0.5
+   }
+  },
+  {
+   "id": "s5",
+   "file": "scenes/s5.js",
+   "lines": [
+    "l12",
+    "l13"
+   ],
+   "transition": {
+    "type": "crossfade",
+    "dur": 0.5
+   }
+  },
+  {
+   "id": "s6",
+   "file": "scenes/s6.js",
+   "lines": [
+    "l14",
+    "l15",
+    "l16",
+    "l17"
+   ],
+   "transition": {
+    "type": "crossfade",
+    "dur": 0.5
+   }
+  },
+  {
+   "id": "s7",
+   "file": "scenes/s7.js",
+   "lines": [
+    "l18",
+    "l19",
+    "l20",
+    "l21"
+   ],
+   "transition": {
+    "type": "crossfade",
+    "dur": 0.5
+   }
+  },
+  {
+   "id": "s8",
+   "file": "scenes/s8.js",
+   "lines": [
+    "l22"
+   ],
+   "transition": {
+    "type": "crossfade",
+    "dur": 0.5
+   }
+  },
+  {
+   "id": "s9",
+   "file": "scenes/s9.js",
+   "lines": [
+    "l23",
+    "l24"
+   ],
+   "transition": {
+    "type": "crossfade",
+    "dur": 0.5
+   }
+  },
+  {
+   "id": "s10",
+   "file": "scenes/s10.js",
+   "lines": [
+    "l25",
+    "l26",
+    "l27"
+   ],
+   "transition": {
+    "type": "crossfade",
+    "dur": 0.5
+   }
+  },
+  {
+   "id": "s11",
+   "file": "scenes/s11.js",
+   "lines": [
+    "l28",
+    "l29"
+   ],
+   "transition": {
+    "type": "crossfade",
+    "dur": 0.5
+   }
+  },
+  {
+   "id": "s12",
+   "file": "scenes/s12.js",
+   "lines": [
+    "l30",
+    "l31",
+    "l32"
+   ],
+   "transition": {
+    "type": "crossfade",
+    "dur": 0.5
+   }
+  },
+  {
+   "id": "s13",
+   "file": "scenes/s13.js",
+   "lines": [
+    "l33",
+    "l34"
+   ],
+   "transition": {
+    "type": "crossfade",
+    "dur": 0.5
+   }
+  },
+  {
+   "id": "s14",
+   "file": "scenes/s14.js",
+   "lines": [
+    "l35",
+    "l36",
+    "l37",
+    "l38",
+    "l39"
+   ],
+   "transition": {
+    "type": "crossfade",
+    "dur": 0.5
+   }
+  },
+  {
+   "id": "s15",
+   "file": "scenes/s15.js",
+   "lines": [
+    "l40",
+    "l41"
+   ],
+   "transition": {
+    "type": "crossfade",
+    "dur": 0.5
+   }
+  },
+  {
+   "id": "s16",
+   "file": "scenes/s16.js",
+   "lines": [
+    "l42",
+    "l43",
+    "l44",
+    "l45",
+    "l46"
+   ],
+   "transition": {
+    "type": "crossfade",
+    "dur": 0.5
+   }
+  },
+  {
+   "id": "s17",
+   "file": "scenes/s17.js",
+   "lines": [
+    "l47",
+    "l48",
+    "l49",
+    "l50",
+    "l51"
+   ],
+   "transition": {
+    "type": "crossfade",
+    "dur": 0.5
+   }
   }
  ]
 }

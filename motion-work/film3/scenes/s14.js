@@ -13,7 +13,7 @@ MOTION.scene({ id: 's14',
       const on = t < (rows[i + 1] ? ctx.lineSpan(rows[i + 1][0]).s - 0.1 : ctx.lineSpan('l39').e + 1);
       card(ctx, 140, y - 85 + (1 - k) * 30, 800, 170, { fill: on ? '#F6F3EC' : 'rgba(246,243,236,0.6)', stroke: on ? P.acc : P.hi, lw: on ? 5 : 3, r: 30, alpha: k, shadow: on });
       ctx.text(X, String(i + 1), 880, y + 25, { family: FAM, weight: 900, size: 70, color: P.acc, alpha: k, dir: 'ltr' });
-      ctx.text(X, txt, 480, y + 22 + (1 - k) * 30, { family: FAM, weight: 900, size: 62, color: P.ink, alpha: k * (on ? 1 : 0.6) }); });
+      ctx.text(X, txt, 470, y + 20 + (1 - k) * 30, { family: FAM, weight: 900, size: 54, maxWidth: 620, color: P.ink, alpha: k * (on ? 1 : 0.6) }); });
     const s39 = wt(ctx, 'l39', 1), kb = at(t, s39 - 0.2, s39 + 0.4, 'expoOut');
     bin(ctx, 760, 1380, kb);
     say(ctx, t, 'l39', { x: 400, y: 1400, size: 68, weight: 900, maxWidth: 520, accent: [5] });

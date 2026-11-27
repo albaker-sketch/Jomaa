@@ -7,5 +7,5 @@ MOTION.scene({ id: 's13',
     say(ctx, t, 'l33', { y: 720, size: 120, weight: 900, accent: [3] });
     orn(ctx, 540, 820, at(lt, 0.4, 1.4), { scale: 1.0 });
     say(ctx, t, 'l34', { from: 0, to: 1, y: 1080, size: 110, weight: 900, accent: [1] });
-    say(ctx, t, 'l34', { from: 2, to: 9, y: 1260, size: 62, maxWidth: 880, accent: [9] });
+    say(ctx, t, 'l34', { from: 2, to: 9, y: 1260, size: 62, maxWidth: 800, accent: [9] });
   } });

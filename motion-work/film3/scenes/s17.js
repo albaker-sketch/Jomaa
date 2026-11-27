@@ -10,7 +10,7 @@ MOTION.scene({ id: 's17',
     const it = [['عمره', 'فيما أفناه', wt(ctx, 'l48', 9)], ['علمه', 'فيما فعل', wt(ctx, 'l49', 1)], ['ماله', 'من أين اكتسبه وفيما أنفقه', wt(ctx, 'l50', 1)], ['جسمه', 'فيما أبلاه', wt(ctx, 'l51', 1)]];
     it.forEach(([a, b, s], i) => { const k = at(t, s - 0.15, s + 0.4, 'expoOut'); if (k <= 0) return; const y = 640 + i * 210;
       card(ctx, 120, y - 85 + (1 - k) * 30, 840, 175, { fill: '#F6F3EC', stroke: P.acc, lw: 4, r: 30, alpha: k, shadow: true });
-      X.save(); X.globalAlpha = k; X.fillStyle = P.acc; X.beginPath(); X.arc(880, y + 3, 46, 0, 6.283); X.fill(); X.restore();
+      X.save(); X.globalAlpha *= k; X.fillStyle = P.acc; X.beginPath(); X.arc(880, y + 3, 46, 0, 6.283); X.fill(); X.restore();
       ctx.text(X, String(i + 1), 880, y + 28, { family: FAM, weight: 900, size: 64, color: P.bg, alpha: k, dir: 'ltr' });
       ctx.text(X, a, 790, y + 25, { family: FAM, weight: 900, size: 76, color: P.ink, alpha: k, align: 'right' });
       ctx.text(X, b, 560, y + 18, { family: FAM, weight: 700, size: 44, color: P.mut, alpha: at(t, s + 0.3, s + 0.7), align: 'right', maxWidth: 400 }); });

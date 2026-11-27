@@ -8,8 +8,8 @@ MOTION.scene({ id: 's9',
     ctx.drawPath(X, [[540, 520], [545, 640], [540, 720]], ks, { width: 10, color: '#B58A3C' });
     const cols = { b: '#C9B037', t: '#6B3B1F', r: '#A8642A' }, r = ctx.rng('dates');
     const S = [['b', wt(ctx, 'l23', 8)], ['t', wt(ctx, 'l23', 9)], ['r', wt(ctx, 'l23', 10)]];
-    for (let i = 0; i < 54; i++) { const row = Math.floor(i / 6), col = i % 6, kind = S[i % 3];
-      const x = 540 + (col - 2.5) * (52 - row * 3) + (r() - 0.5) * 14, y = 740 + row * 50 + (r() - 0.5) * 10;
+    for (let i = 0; i < 54; i++) { const row = Math.floor(i / 6), col = i % 6, kind = S[i % 3]; if (col >= 6 - Math.floor(row / 2)) continue; const nc = 6 - Math.floor(row / 2);
+      const x = 540 + (col - (nc - 1) / 2) * 52 + (r() - 0.5) * 14, y = 740 + row * 50 + (r() - 0.5) * 10;
       const k = at(t, kind[1] - 0.1 + row * 0.03, kind[1] + 0.3 + row * 0.03, 'expoOut'); if (k <= 0) continue;
       X.save(); X.globalAlpha = k; X.fillStyle = cols[kind[0]]; X.beginPath(); X.ellipse(x, y, 17 * k, 26 * k, (r() - 0.5) * 0.6, 0, 6.283); X.fill(); X.restore(); }
     chip(ctx, t, 'بسر', 820, 1290, wt(ctx, 'l23', 8), { w: 220, h: 110, size: 58, stroke: cols.b });

@@ -18,5 +18,5 @@ MOTION.scene({ id: 's1',
       X.fillStyle = '#16263A'; X.beginPath(); X.moveTo(-110, 250); X.lineTo(-110 + 180 * ko, 230); X.lineTo(-110 + 180 * ko, -40); X.lineTo(-110, -60); X.closePath(); X.fill();
       X.restore(); }
     say(ctx, t, 'l2', { y: 1360, size: 80, weight: 900, color: P.bg, accent: [1, 2], accentColor: P.hi, out: wt(ctx, 'l3', 0) - 0.3 });
-    say(ctx, t, 'l3', { y: 1340, size: 64, maxWidth: 880, color: P.bg, accent: [3, 5], accentColor: P.hi });
+    say(ctx, t, 'l3', { y: 1340, size: 64, maxWidth: 800, color: P.bg, accent: [3, 5], accentColor: P.hi });
   } });

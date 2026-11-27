@@ -5,11 +5,11 @@ MOTION.scene({ id: 's14',
     const { X, P, at } = ctx; bg(ctx, t);
     const e = ctx.lineSpan('l34').e, outro = at(t, e + 1.0, e + 1.7, 'expoInOut');
     X.save(); X.globalAlpha = 1 - outro;
-    frame(ctx, 110, 500, 860, 760, at(lt, 0.2, 1.3, 'cubicInOut'));
-    say(ctx, t, 'l33', { from: 0, to: 0, y: 640, size: 60, color: P.mut });
-    say(ctx, t, 'l33', { from: 1, to: 7, y: 850, size: 92, weight: 900, maxWidth: 740, lh: 1.4, valign: 'center', accent: [2] });
-    say(ctx, t, 'l34', { y: 1130, size: 100, weight: 900, accent: [0, 1, 2] });
-    orn(ctx, 540, 1400, at(t, ctx.lineSpan('l34').s, ctx.lineSpan('l34').s + 1.0), { scale: 1.2 });
+    frame(ctx, 110, 480, 860, 640, at(lt, 0.2, 1.3, 'cubicInOut'));
+    say(ctx, t, 'l33', { from: 0, to: 0, y: 590, size: 58, color: P.mut });
+    say(ctx, t, 'l33', { from: 1, to: 7, y: 830, size: 84, weight: 900, maxWidth: 760, lh: 1.4, valign: 'center', accent: [2] });
+    say(ctx, t, 'l34', { y: 1290, size: 100, weight: 900, accent: [0, 1, 2] });
+    orn(ctx, 540, 1420, at(t, ctx.lineSpan('l34').s, ctx.lineSpan('l34').s + 1.0), { scale: 1.2 });
     X.restore();
     if (outro > 0) { const lg = ctx.img('logo');
       if (lg) { const w = 520, h = w * lg.height / lg.width; X.save(); X.globalAlpha = outro; X.translate(540, 740); X.drawImage(lg, -w / 2, -h / 2, w, h); X.restore(); }

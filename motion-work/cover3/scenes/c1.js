@@ -1,19 +1,30 @@
-import { bg, orn, FAM } from './_lib.js';
-// كفر: «لتُسألنّ / عن هذا النعيم» + عذق تمر وقطرة ماء (من القصة)
-MOTION.scene({ id: 'c1', start: 0, end: 1,
+import { bg, orn, frame, FAM } from './_lib.js';
+// ثلاث أفكار كفر: t<1 كحلي مهيب · t<2 عنابي هويته · t<3 «الجوع ← النعيم»
+MOTION.scene({ id: 'c1', start: 0, end: 3,
   draw(t, lt, ctx) {
-    const { X, P } = ctx; bg(ctx, 3, { pat: 0.12 });
-    orn(ctx, 540, 450, 1, { scale: 1.5 });
-    ctx.text(X, 'لتُسألُنّ', 540, 720, { family: FAM, weight: 900, size: 220, color: P.acc });
-    ctx.text(X, 'عن هذا النعيم', 540, 930, { family: FAM, weight: 900, size: 150, color: P.ink });
-    // عذق تمر
-    const cols = ['#C9B037', '#6B3B1F', '#A8642A'], r = ctx.rng('c');
-    X.save(); X.strokeStyle = '#B58A3C'; X.lineWidth = 10; X.lineCap = 'round'; X.beginPath(); X.moveTo(640, 1040); X.quadraticCurveTo(648, 1090, 640, 1130); X.stroke(); X.restore();
-    for (let row = 0; row < 7; row++) { const nc = 5 - Math.floor(row / 2); for (let c = 0; c < nc; c++) {
-      const x = 640 + (c - (nc - 1) / 2) * 46 + (r() - 0.5) * 8, y = 1150 + row * 44;
-      X.save(); X.fillStyle = cols[(row + c) % 3]; X.beginPath(); X.ellipse(x, y, 16, 24, (r() - 0.5) * 0.5, 0, 6.283); X.fill(); X.restore(); } }
-    // قطرة ماء
-    X.save(); X.translate(400, 1260); X.fillStyle = '#5B8DB8'; X.beginPath(); X.moveTo(0, -150); X.bezierCurveTo(45, -75, 110, 0, 110, 50); X.arc(0, 50, 110, 0, Math.PI); X.bezierCurveTo(-110, 0, -45, -75, 0, -150); X.fill();
-    X.fillStyle = 'rgba(255,255,255,0.45)'; X.beginPath(); X.ellipse(-40, 45, 16, 36, -0.3, 0, 6.283); X.fill(); X.restore();
-    orn(ctx, 540, 1490, 1, { scale: 1.2 });
+    const { X, P } = ctx, v = Math.floor(t);
+    if (v === 0) {
+      bg(ctx, 3, { color: P.ink, pat: 0.07 });
+      frame(ctx, 120, 430, 840, 1060, 1, { color: P.hi, color2: P.hi });
+      ctx.text(X, 'والذي نفسي بيده', 540, 600, { family: FAM, weight: 700, size: 64, color: P.hi });
+      ctx.text(X, 'لتُسألُنّ', 540, 860, { family: FAM, weight: 900, size: 230, color: P.bg });
+      ctx.text(X, 'عن هذا النعيم', 540, 1080, { family: FAM, weight: 900, size: 140, color: P.hi });
+      ctx.text(X, 'يوم القيامة', 540, 1300, { family: FAM, weight: 900, size: 120, color: P.bg });
+    } else if (v === 1) {
+      bg(ctx, 3, { color: P.acc, pat: 0.08 });
+      X.save(); X.globalAlpha = 0.22; X.strokeStyle = P.hi; X.lineWidth = 8; X.translate(540, 960);
+      for (const r0 of [0, Math.PI / 4]) { X.beginPath(); for (let i = 0; i < 4; i++) { const a = r0 + i * Math.PI / 2; X[i ? 'lineTo' : 'moveTo'](560 * Math.cos(a), 560 * Math.sin(a)); } X.closePath(); X.stroke(); } X.restore();
+      ctx.text(X, 'النعيم', 540, 960, { family: FAM, weight: 900, size: 300, color: P.bg });
+      ctx.text(X, 'لتُسألُنّ عن هذا', 540, 640, { family: FAM, weight: 900, size: 110, color: P.hi });
+      ctx.text(X, 'يوم القيامة', 540, 1240, { family: FAM, weight: 900, size: 120, color: P.hi });
+      X.save(); X.fillStyle = P.hi; X.fillRect(390, 1330, 300, 8); X.restore();
+    } else {
+      bg(ctx, 3, { pat: 0.12 });
+      ctx.text(X, 'خرجوا من', 540, 560, { family: FAM, weight: 700, size: 70, color: P.mut });
+      ctx.text(X, 'الجوع', 540, 780, { family: FAM, weight: 900, size: 220, color: P.ink });
+      X.save(); X.strokeStyle = P.hi; X.lineWidth = 12; X.lineCap = 'round'; X.beginPath(); X.moveTo(540, 850); X.lineTo(540, 1010); X.stroke();
+      X.fillStyle = P.hi; X.beginPath(); X.moveTo(500, 1000); X.lineTo(580, 1000); X.lineTo(540, 1060); X.closePath(); X.fill(); X.restore();
+      ctx.text(X, 'النعيم', 540, 1260, { family: FAM, weight: 900, size: 220, color: P.acc });
+      ctx.text(X, 'وأيّ نعيم؟', 540, 1440, { family: FAM, weight: 900, size: 110, color: P.ink });
+    }
   } });

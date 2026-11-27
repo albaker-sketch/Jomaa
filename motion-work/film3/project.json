@@ -1,0 +1,45 @@
+{
+ "name": "film3",
+ "fps": 60,
+ "width": 1080,
+ "height": 1920,
+ "bpm": 90,
+ "beatsPerBar": 4,
+ "beatOffset": 0,
+ "palette": {
+  "bg": "#E9E5DB",
+  "ink": "#243950",
+  "acc": "#6A2537",
+  "clay": "#4E1A28",
+  "hi": "#A89A78",
+  "mut": "#8C8068",
+  "onAcc": "#E9E5DB"
+ },
+ "fonts": {
+  "display": "Tajawal",
+  "body": "Tajawal",
+  "num": "Tajawal"
+ },
+ "images": {
+  "logo": "assets/logo.png"
+ },
+ "post": {
+  "grain": 0.03,
+  "vignette": 0.12
+ },
+ "timing": {
+  "keepOriginal": true,
+  "snap": "none",
+  "startPad": 0,
+  "tail": 4.5
+ },
+ "scenes": [
+  {
+   "id": "s1",
+   "file": "scenes/s1.js",
+   "lines": [
+    "l1"
+   ]
+  }
+ ]
+}

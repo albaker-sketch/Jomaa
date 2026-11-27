@@ -13,11 +13,11 @@ MOTION.scene({ id: 'c1', start: 0, end: 3,
     } else if (v === 1) {
       bg(ctx, 3, { color: v === 1 ? P.ink : P.acc, pat: 0.07 });
       X.save(); X.globalAlpha = 0.3; X.strokeStyle = P.hi; X.lineWidth = 8; X.translate(540, 960);
-      for (const r0 of [0, Math.PI / 4]) { X.beginPath(); for (let i = 0; i < 4; i++) { const a = r0 + i * Math.PI / 2; X[i ? 'lineTo' : 'moveTo'](560 * Math.cos(a), 560 * Math.sin(a)); } X.closePath(); X.stroke(); } X.restore();
-      ctx.text(X, 'النعيم', 540, 960, { family: FAM, weight: 900, size: 300, color: P.bg });
-      ctx.text(X, 'لتُسألُنّ عن هذا', 540, 640, { family: FAM, weight: 900, size: 110, color: P.hi });
-      ctx.text(X, 'يوم القيامة', 540, 1240, { family: FAM, weight: 900, size: 120, color: P.hi });
-      X.save(); X.fillStyle = P.hi; X.fillRect(390, 1330, 300, 8); X.restore();
+      for (const r0 of [0, Math.PI / 4]) { X.beginPath(); for (let i = 0; i < 4; i++) { const a = r0 + i * Math.PI / 2; X[i ? 'lineTo' : 'moveTo'](480 * Math.cos(a), 480 * Math.sin(a)); } X.closePath(); X.stroke(); } X.restore();
+      ctx.text(X, 'النعيم', 540, 1000, { family: FAM, weight: 900, size: 210, color: P.bg });
+      ctx.text(X, 'لتُسألُنّ عن هذا', 540, 770, { family: FAM, weight: 900, size: 96, color: P.hi });
+      ctx.text(X, 'يوم القيامة', 540, 1190, { family: FAM, weight: 900, size: 96, color: P.hi });
+      X.save(); X.fillStyle = P.hi; X.fillRect(420, 1255, 240, 6); X.restore();
     } else {
       bg(ctx, 3, { pat: 0.12 });
       ctx.text(X, 'خرجوا من', 540, 560, { family: FAM, weight: 700, size: 70, color: P.mut });

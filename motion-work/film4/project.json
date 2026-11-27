@@ -181,27 +181,12 @@
    }
   },
   {
-   "id": "s13",
-   "file": "scenes/s13.js",
-   "lines": [
-    "l31",
-    "l32"
-   ],
+   "id": "s15",
+   "file": "scenes/s15.js",
+   "lines": [],
    "transition": {
     "type": "crossfade",
-    "dur": 0.5
-   }
-  },
-  {
-   "id": "s14",
-   "file": "scenes/s14.js",
-   "lines": [
-    "l33",
-    "l34"
-   ],
-   "transition": {
-    "type": "crossfade",
-    "dur": 0.5
+    "dur": 0.6
    }
   }
  ]

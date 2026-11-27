@@ -66,18 +66,6 @@
   "dur": 0.6
  },
  {
-  "type": "whoosh",
-  "at": "scene:s13",
-  "gain": 0.15,
-  "dur": 0.6
- },
- {
-  "type": "whoosh",
-  "at": "scene:s14",
-  "gain": 0.15,
-  "dur": 0.6
- },
- {
   "type": "shimmer",
   "at": "word:l1:10",
   "gain": 0.2
@@ -86,11 +74,6 @@
   "type": "shimmer",
   "at": "word:l11:3",
   "gain": 0.2
- },
- {
-  "type": "shimmer",
-  "at": "line-end:l34+1.0",
-  "gain": 0.22
  },
  {
   "type": "tick",
@@ -111,5 +94,10 @@
   "type": "tick",
   "at": "word:l29:3",
   "gain": 0.24
+ },
+ {
+  "type": "shimmer",
+  "at": "scene:s15+0.3",
+  "gain": 0.22
  }
 ]
